@@ -1,3 +1,5 @@
+import { BaseIMDBImageURL } from "../constants";
+
 export async function getMoviesNowPlaying(page) {
     const options = {
             method: 'GET',
@@ -66,9 +68,18 @@ export async function getMovieDetails(movieId) {
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        const json = await response.json();
-        console.log(json);
-        const movieDetails = json.data;
+        const movie = await response.json();
+        console.log(movie);
+        const movieDetails = {
+            movieTitle: movie.title,
+            backdropPosterUrl: BaseIMDBImageURL + movie.backdrop_path,
+            runtime: movie.runtime,
+            overview: movie.overview,
+            genres: movie.genres.map(genre => genre.name + " "),
+            releaseDate: movie.release_date
+        };
+
+
         return movieDetails;
     }catch(error){
         console.error(error.message);
