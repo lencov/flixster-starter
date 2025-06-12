@@ -8,7 +8,7 @@ function MovieCard({ backdrop_path, overview, poster_path, title, vote_average, 
         <div className='MovieCard' onClick={onClick}>
             <img className='Card-img' src={`${posterUrl}`} alt="MoviePoster"/>
             <h2 className='MovieTitle'>{`${title}`}</h2>
-            <h4 className='MovieRating'>Rating: {`${vote_average}`}</h4>
+            <h4 className='MovieRating'>Rating: {`${vote_average.toFixed(1)}`}</h4>
         </div>
     )
 

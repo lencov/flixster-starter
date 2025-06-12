@@ -40,10 +40,12 @@ const App = () => {
 	}
 
 	const handleClearSearch = () => {
-		setSearchQuery('');
-        setDisplayType('NowPlaying');
-        setPageNum(1);
-        setMovies([]);
+		if (displayType === 'Search'){
+			setSearchQuery('');
+        	setDisplayType('NowPlaying');
+        	setPageNum(1);
+        	setMovies([]);
+		}
 	}
 
     return (
@@ -55,9 +57,10 @@ const App = () => {
         </header>
         <main>
           <MovieList movies={movies} /*sortOption={sortOption}*//>
+		  <LoadMoreBtn onClick={handleLoadMore} />
         </main>
         <footer>
-          <LoadMoreBtn onClick={handleLoadMore} />
+		  <h3>Copyright stuff and other info</h3>
         </footer>
 
       </div>
