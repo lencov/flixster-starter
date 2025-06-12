@@ -23,7 +23,7 @@ export async function getMoviesNowPlaying(page) {
     }
 }
 
-export async function getMovieByTitle(title, page) {
+export async function getMoviesByTitle(title, page) {
 
     const options = {
             method: 'GET',
@@ -42,7 +42,7 @@ export async function getMovieByTitle(title, page) {
         }
         const json = await response.json();
         console.log(json);
-        const movieList = json.data.results;
+        const movieList = json.results;
         return movieList
     }catch(error){
         console.error(error.message);

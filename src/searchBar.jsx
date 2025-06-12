@@ -1,17 +1,25 @@
 import './SearchBar.css';
+import { useState } from 'react';
 
-function SearchBar() {
-
+function SearchBar({ onSubmit, onClear }) {
+    const [inputValue, setInputValue] = useState('');
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit(inputValue);
+    };
+    const handleClear = () => {
+        setInputValue('');
+        onClear();
+    };
     return (
-        <div className='SearchBar'>
-            <form id="SearchBar">
-                <label> Search </label>
-                <input type="text" id="searchInput" name="searchInput" placeholder='Search'></input>
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    )
+        <form onSubmit={handleSubmit}>
+            <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Search" />
+            <button type="submit">Search</button>
+            <button type="button" onClick={handleClear}>Clear</button>
+        </form>
+    );
 }
-
 export default SearchBar;
