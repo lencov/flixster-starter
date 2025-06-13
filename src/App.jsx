@@ -6,7 +6,7 @@ import LoadMoreBtn from './LoadMoreBtn'
 import SortDropdown from './SortDropdown'
 import Sidebar from './Sidebar'
 import { getMoviesNowPlaying, getMoviesByTitle } from './movieService'
-import { removeDuplicates, applySorting, getFavoritedList, getWatchedList } from './utils'
+import { removeDuplicates, applySorting, getFavoritedList, getWatchedList, filterMoviesByIds } from './utils'
 
 const App = () => {
 
@@ -19,6 +19,7 @@ const App = () => {
 	const [favoriteMap, setFavoriteMap] = useState(new Map()); // {movieId, [boolean, movieTitle]}
 	const [watchedMap, setWatchedMap] = useState(new Map()); // {movieId, [boolean, movieTitle]}
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const [currentPage, setCurrentPage] = useState('Home'); // Home, Favorited, Watched
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -32,11 +33,12 @@ const App = () => {
 			const newMovieList = [...movies, ...movieResults]
     		applySorting(newMovieList, sortOption);
     		const uniqueMovies = removeDuplicates(newMovieList);
-    		setSortedMovies(uniqueMovies);
+			const displayedMovies = selectDisplayedMovies(uniqueMovies);
+    		setSortedMovies(displayedMovies);
         };
         fetchMovies();
 
-    }, [displayType, searchQuery, pageNum, sortOption]);
+    }, [displayType, searchQuery, pageNum, sortOption, currentPage]);
 
     const handleLoadMore = () => {
         setPageNum((prevPage) => prevPage + 1);
@@ -64,15 +66,34 @@ const App = () => {
 
 	const favoritedMovies = getFavoritedList(favoriteMap);
     const watchedMovies = getWatchedList(watchedMap);
+	const favoritedMovieIds = favoritedMovies.map(movie => movie.id);
+    const watchedMovieIds = watchedMovies.map(movie => movie.id);
+
+	const selectDisplayedMovies = (movies) => {
+    	switch (currentPage) {
+    	  case 'Home':
+			return movies
+    	  case 'Favorites':
+    	    return filterMoviesByIds(movies, favoritedMovieIds);
+    	  case 'Watched':
+    	    return filterMoviesByIds(movies, watchedMovieIds)
+    	  default:
+    	    return null;
+    	}
+  };
 
     return (
         <div className="App">
             <button onClick={toggleSidebar} className="ToggleSidebarButton">
-                {isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
-            </button>
-            {isSidebarOpen && (
-                <Sidebar favoritedMovies={favoritedMovies} watchedMovies={watchedMovies} />
-            )}
+        		{isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
+      		</button>
+      		{isSidebarOpen && (
+        		<Sidebar
+          			favoritedMovies={favoritedMovies}
+          			watchedMovies={watchedMovies}
+          			setCurrentPage={setCurrentPage}
+        		/>
+      		)}
             <div className="MainContent" style={{ marginLeft: isSidebarOpen ? '250px' : '0' }}>
                 <header>
                     <h1>Flixster</h1>
@@ -90,11 +111,11 @@ const App = () => {
                     <LoadMoreBtn onClick={handleLoadMore} />
                 </main>
                 <footer>
-                    <h3>Copyright stuff and other info</h3>
+                    <h3>Copyright info</h3>
                 </footer>
             </div>
         </div>
-    );ftvcvckrhficddnbuvntngjlbfhhnftj
+    );
 }
 
 export default App

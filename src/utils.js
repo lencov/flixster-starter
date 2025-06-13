@@ -52,3 +52,7 @@
         });
         return watchedMovies;
     };
+
+    export const filterMoviesByIds = (movies, movieIds) => {
+        return movies.filter(movie => movieIds.includes(movie.id));
+    };
