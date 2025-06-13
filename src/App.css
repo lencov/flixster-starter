@@ -37,3 +37,23 @@ footer {
   padding: 20px;
   padding-top: 10px;
 }
+
+.ToggleSidebarButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.ToggleSidebarButton:hover {
+    background-color: #0056b3;
+}
+.MainContent {
+    transition: margin-left 0.3s;
+}

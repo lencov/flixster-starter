@@ -1,0 +1,23 @@
+.Sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.Sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.Sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.Sidebar li {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}

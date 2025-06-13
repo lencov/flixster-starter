@@ -105,8 +105,7 @@ export async function getMovieTrailers(movieId) {
         }
         const json = await response.json();
         console.log(json);
-        const videos = json.data.results;
-        return videos;
+        return json;
     }catch(error){
         console.error(error.message);
     }

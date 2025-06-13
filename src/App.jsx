@@ -4,7 +4,9 @@ import MovieList from './MovieList'
 import SearchBar from './SearchBar'
 import LoadMoreBtn from './LoadMoreBtn'
 import SortDropdown from './SortDropdown'
+import Sidebar from './Sidebar'
 import { getMoviesNowPlaying, getMoviesByTitle } from './movieService'
+import { removeDuplicates, applySorting, getFavoritedList, getWatchedList } from './utils'
 
 const App = () => {
 
@@ -12,8 +14,11 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState(''); 
     const [movies, setMovies] = useState([]);
     const [displayType, setDisplayType] = useState('NowPlaying');
-	const [sortOption, setSortOption] = useState('')
-	const [sortedMovies, setSortedMovies] = useState([])
+	const [sortOption, setSortOption] = useState('');
+	const [sortedMovies, setSortedMovies] = useState([]);
+	const [favoriteMap, setFavoriteMap] = useState(new Map()); // {movieId, [boolean, movieTitle]}
+	const [watchedMap, setWatchedMap] = useState(new Map()); // {movieId, [boolean, movieTitle]}
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -53,39 +58,43 @@ const App = () => {
 		}
 	}
 
-	const applySorting = (moviesArray, option) => {
-    	if (option === 'title') {
-    	    moviesArray.sort((a, b) => a.title.localeCompare(b.title));
-    	} else if (option === 'rating') {
-    	    moviesArray.sort((a, b) => b.vote_average - a.vote_average);
-    	} else if (option === 'releaseDate') {
-    	    moviesArray.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-    	}
-	};
+	const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
-	const removeDuplicates = (moviesArray) => {
-		return moviesArray.filter((movie, index, self) =>
-        	index === self.findIndex((m) => m.id === movie.id)
-    	);
-	}
+	const favoritedMovies = getFavoritedList(favoriteMap);
+    const watchedMovies = getWatchedList(watchedMap);
 
     return (
-      <div className="App">
-        <header>
-           <h1>Flixster</h1>
-           <SearchBar onSubmit={handleSearchSubmit} onClear={handleClearSearch}/>
-           <SortDropdown onChange={setSortOption}/>
-        </header>
-        <main>
-          <MovieList movies={sortedMovies} sortOption={sortOption}/>
-		  <LoadMoreBtn onClick={handleLoadMore} />
-        </main>
-        <footer>
-		  <h3>Copyright stuff and other info</h3>
-        </footer>
-
-      </div>
-    )
+        <div className="App">
+            <button onClick={toggleSidebar} className="ToggleSidebarButton">
+                {isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
+            </button>
+            {isSidebarOpen && (
+                <Sidebar favoritedMovies={favoritedMovies} watchedMovies={watchedMovies} />
+            )}
+            <div className="MainContent" style={{ marginLeft: isSidebarOpen ? '250px' : '0' }}>
+                <header>
+                    <h1>Flixster</h1>
+                    <SearchBar onSubmit={handleSearchSubmit} onClear={handleClearSearch} />
+                    <SortDropdown onChange={setSortOption} />
+                </header>
+                <main>
+                    <MovieList 
+                        movies={sortedMovies} 
+                        favoriteMap={favoriteMap} 
+                        watchedMap={watchedMap} 
+                        setFavoriteMap={setFavoriteMap} 
+                        setWatchedMap={setWatchedMap} 
+                    />
+                    <LoadMoreBtn onClick={handleLoadMore} />
+                </main>
+                <footer>
+                    <h3>Copyright stuff and other info</h3>
+                </footer>
+            </div>
+        </div>
+    );ftvcvckrhficddnbuvntngjlbfhhnftj
 }
 
 export default App
