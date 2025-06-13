@@ -18,12 +18,14 @@ function MovieCard({
             <img className='Card-img' src={`${posterUrl}`} alt="MoviePoster"/>
             <h2 className='MovieTitle'>{`${title}`}</h2>
             <h4 className='MovieRating'>Rating: {`${vote_average.toFixed(1)}`}</h4>
-            <button onClick={(e) => { e.stopPropagation(); onFavoriteToggle(); }}>
-                {isFavorited ? 'Unfavorite' : 'Favorite'}
-            </button>
-            <button onClick={(e) => { e.stopPropagation(); onWatchedToggle(); }}>
-                {isWatched ? 'Unwatch' : 'Watched'}
-            </button>
+            <div className='MovieCard-buttons'>
+              <button onClick={(e) => { e.stopPropagation(); onFavoriteToggle(); }}>
+                {isFavorited ? '❤️' : '🤍'}
+              </button>
+              <button onClick={(e) => { e.stopPropagation(); onWatchedToggle(); }}>
+                {isWatched ? '👁️' : '🚫'}
+              </button>
+            </div>
         </div>
     )
 

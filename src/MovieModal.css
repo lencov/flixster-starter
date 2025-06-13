@@ -7,11 +7,11 @@
   background: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   padding: 1rem;
+  overflow-y: auto;
 }
-
 .modal-content {
   background: #fff;
-  width: 100%;
+  width: 90%;
   max-width: 700px;
   border-radius: 20px;
   padding: 2rem 2.5rem;
@@ -20,8 +20,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
 }
-
 .closeBtn {
   position: absolute;
   top: 1rem;
@@ -31,19 +32,25 @@
   cursor: pointer;
   color: #c0c0c0;
 }
-
 .closeBtn:hover {
   color: #000;
 }
-
 #modalImage {
   width: 100%;
   border-radius: 12px;
   object-fit: cover;
-  max-height: 280px;
+  max-height: 200px;
 }
-
 .movie-title {
   font-weight: 600;
   color: #374151;
+}
+.video-container {
+  margin-top: 20px;
+  text-align: center;
+}
+.video-container iframe {
+  width: 100%;
+  height: 315px;
+  max-height: 40vh;
 }
