@@ -77,43 +77,42 @@ Deployed Application (**required**): [Flixster Deployed Site](https://flixster-s
     - [x] Clicking on the visual element should mark the movie as favorited
     - [x] There should be visual feedback (such as the heart turning a different color) to show that the movie has been favorited by the user.
   - [x] If the movie is already favorited:
-    - [ ] Clicking on the visual element should mark the movie as *not* favorited.
-    - [ ] There should be visual feedback (such as the heart turning a different color) to show that the movie has been unfavorited. 
-- [ ] **Watched Checkbox**
-  - [ ] For each movie displayed, users can mark the movie as watched.
-  - [ ] There should be visual element (such as an eye icon) on each movie's tile to show whether or not the movie has been watched.
-  - [ ] If the movie has not been watched:
-    - [ ] Clicking on the visual element should mark the movie as watched
-    - [ ] There should be visual feedback (such as the eye turning a different color) to show that the movie has been watched by the user.
-  - [ ] If the movie is already watched:
-    - [ ] Clicking on the visual element should mark the movie as *not* watched.
-    - [ ] There should be visual feedback (such as the eye turning a different color) to show that the movie has not been watched.
-- [ ] **Sidebar**
-  - [ ] The website includes a side navigation bar.
-  - [ ] The sidebar has three pages:
-    - [ ] Home
-    - [ ] Favorites
-    - [ ] Watched
-  - [ ] The Home page displays all current movies in a grid view, the search bar, and the sort movies drop-down.
-  - [ ] The Favorites page displays all favorited movies in a grid view.
-  - [ ] The Watched page displays all watched movies in a grid view.
+    - [x] Clicking on the visual element should mark the movie as *not* favorited.
+    - [x] There should be visual feedback (such as the heart turning a different color) to show that the movie has been unfavorited. 
+- [x] **Watched Checkbox**
+  - [x] For each movie displayed, users can mark the movie as watched.
+  - [x] There should be visual element (such as an eye icon) on each movie's tile to show whether or not the movie has been watched.
+  - [x] If the movie has not been watched:
+    - [x] Clicking on the visual element should mark the movie as watched
+    - [x] There should be visual feedback (such as the eye turning a different color) to show that the movie has been watched by the user.
+  - [x] If the movie is already watched:
+    - [x] Clicking on the visual element should mark the movie as *not* watched.
+    - [x] There should be visual feedback (such as the eye turning a different color) to show that the movie has not been watched.
+- [x] **Sidebar**
+  - [x] The website includes a side navigation bar.
+  - [x] The sidebar has three pages:
+    - [x] Home
+    - [x] Favorites
+    - [x] Watched
+  - [x] The Home page displays all current movies in a grid view, the search bar, and the sort movies drop-down.
+  - [x] The Favorites page displays all favorited movies in a grid view.
+  - [x] The Watched page displays all watched movies in a grid view.
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+[Watch the video](https://www.loom.com/share/9170f1b04663470db6ef45f9fffd26b9)
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Yes the labs prepared me to complete the assignment. I did not feel unprepared to complete anything as there is enough documentation and other resources for me to figure things out.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
+
+I would have fixed the styling a little more and made the UI a little cleaner. There were some things with how I rendered movies that could be more efficient. In some places I am storing more data than I need to. So I would go back and do some refactoring if I had more time.
   
-Add your response here
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The project demo went well. Nothing went wrong except I had to pause it half way through and pull up the contrast checker because I forgot that was part of the requirements.
