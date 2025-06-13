@@ -4,9 +4,15 @@ function Sidebar({ favoritedMovies, watchedMovies, setCurrentPage }) {
     <div className="Sidebar">
       <h2>Navigation</h2>
       <ul>
-        <li onClick={() => setCurrentPage('Home')}>Home</li>
-        <li onClick={() => setCurrentPage('Favorites')}>Favorites</li>
-        <li onClick={() => setCurrentPage('Watched')}>Watched</li>
+        <li>
+          <button onClick={() => setCurrentPage('Home')}>Home</button>
+        </li>
+        <li>
+          <button onClick={() => setCurrentPage('Favorites')}>Favorites</button>
+        </li>
+        <li>
+          <button onClick={() => setCurrentPage('Watched')}>Watched</button>
+        </li>
       </ul>
       <h2>Favorites</h2>
       <ul>
