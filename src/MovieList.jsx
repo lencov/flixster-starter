@@ -32,8 +32,6 @@ function MovieList({movies, favoriteMap, watchedMap, setFavoriteMap, setWatchedM
         });
     };
 
-    // console.log('movies being displayed', movies);
-
     return(
         <div className='MovieList'>
             {

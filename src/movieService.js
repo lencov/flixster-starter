@@ -17,7 +17,6 @@ export async function getMoviesNowPlaying(page) {
             throw new Error(`Response status: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
         const movieList = json.results;
         return movieList
     }catch(error){
@@ -43,7 +42,6 @@ export async function getMoviesByTitle(title, page) {
             throw new Error(`Response status: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
         const movieList = json.results;
         return movieList
     }catch(error){
@@ -69,7 +67,6 @@ export async function getMovieDetails(movieId) {
             throw new Error(`Response status: ${response.status}`);
         }
         const movie = await response.json();
-        console.log(movie);
         const movieDetails = {
             movieTitle: movie.title,
             backdropPosterUrl: BaseIMDBImageURL + movie.backdrop_path,
@@ -104,7 +101,6 @@ export async function getMovieTrailers(movieId) {
             throw new Error(`Response status: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
         return json;
     }catch(error){
         console.error(error.message);

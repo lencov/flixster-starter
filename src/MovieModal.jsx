@@ -8,7 +8,6 @@ function MovieModal({movieId, onClose}) {
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
-            console.log('movieId: ', movieId)
             let movie = await getMovieDetails(movieId);
             let trailers = await getMovieTrailers(movieId);
             const youtubeTrailer = trailers.results.find(
@@ -24,7 +23,6 @@ function MovieModal({movieId, onClose}) {
 
     return (
         <div id="movieModal" className="modal-overlay">
-            {console.log("modal is being rendered")}
             {movieDetails && 
             (
             <div className="modal-content">
