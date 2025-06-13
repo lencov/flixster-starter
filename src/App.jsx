@@ -3,6 +3,7 @@ import './App.css'
 import MovieList from './MovieList'
 import SearchBar from './SearchBar'
 import LoadMoreBtn from './LoadMoreBtn'
+import SortDropdown from './SortDropdown'
 import { getMoviesNowPlaying, getMoviesByTitle } from './movieService'
 
 const App = () => {
@@ -11,6 +12,8 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState(''); 
     const [movies, setMovies] = useState([]);
     const [displayType, setDisplayType] = useState('NowPlaying');
+	const [sortOption, setSortOption] = useState('')
+	const [sortedMovies, setSortedMovies] = useState([])
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -20,13 +23,15 @@ const App = () => {
             } else if (searchQuery) {
                 movieResults = await getMoviesByTitle(searchQuery, pageNum);
             }
-			const uniqueMovies = movieResults.filter((movie, index, self) =>
-        index === self.findIndex((m) => m.id === movie.id)
-    );
-            setMovies((prevMovies) => [...prevMovies, ...uniqueMovies]);
+            setMovies((prevMovies) => [...prevMovies, ...movieResults]);
+			const newMovieList = [...movies, ...movieResults]
+    		applySorting(newMovieList, sortOption);
+    		const uniqueMovies = removeDuplicates(newMovieList);
+    		setSortedMovies(uniqueMovies);
         };
         fetchMovies();
-    }, [displayType, searchQuery, pageNum]);
+
+    }, [displayType, searchQuery, pageNum, sortOption]);
 
     const handleLoadMore = () => {
         setPageNum((prevPage) => prevPage + 1);
@@ -35,7 +40,7 @@ const App = () => {
 	const handleSearchSubmit = (query) => {
         setMovies([]);
         setPageNum(1);
-		setDisplayType('Search')
+		setDisplayType('Search');
 		setSearchQuery(query);
 	}
 
@@ -48,15 +53,31 @@ const App = () => {
 		}
 	}
 
+	const applySorting = (moviesArray, option) => {
+    	if (option === 'title') {
+    	    moviesArray.sort((a, b) => a.title.localeCompare(b.title));
+    	} else if (option === 'rating') {
+    	    moviesArray.sort((a, b) => b.vote_average - a.vote_average);
+    	} else if (option === 'releaseDate') {
+    	    moviesArray.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+    	}
+	};
+
+	const removeDuplicates = (moviesArray) => {
+		return moviesArray.filter((movie, index, self) =>
+        	index === self.findIndex((m) => m.id === movie.id)
+    	);
+	}
+
     return (
       <div className="App">
         <header>
            <h1>Flixster</h1>
            <SearchBar onSubmit={handleSearchSubmit} onClear={handleClearSearch}/>
-           {/*place holder for the sorting stuff*/}
+           <SortDropdown onChange={setSortOption}/>
         </header>
         <main>
-          <MovieList movies={movies} /*sortOption={sortOption}*//>
+          <MovieList movies={sortedMovies} sortOption={sortOption}/>
 		  <LoadMoreBtn onClick={handleLoadMore} />
         </main>
         <footer>

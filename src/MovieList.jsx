@@ -3,13 +3,9 @@ import { useEffect, useState } from 'react';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieModal';
 
-function MovieList({movies, sortOption}) {
+function MovieList({movies}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMovieId, setSelectedMovieId] = useState(null);
-
-    useEffect(() => {
-        //sort movies based on sortOption
-    }, []);
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -18,8 +14,9 @@ function MovieList({movies, sortOption}) {
     const openModal = (movieId) => {
         setIsModalOpen(true);
         setSelectedMovieId(movieId);
-        console.log('card was clicked')
     }
+
+    // console.log('movies being displayed', movies);
 
     return(
         <div className='MovieList'>
